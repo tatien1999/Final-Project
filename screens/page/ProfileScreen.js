@@ -101,15 +101,15 @@ const ProfileScreen = ( {navigation}) => {
                 />
             <View style={styles.inputContainer}>
               <Text h1={styles.h1} >
-                      Hi! {userData ? userData.displayName: 'UserName?'}
+                      Hi! {userData ? userData.displayName: 'UserName'}
                   </Text>
                   
               <Text h4={styles.h1} >
-                      Phone number: {userData ? userData.phoneNumber: 'Phone?'}
+                      Phone number: {userData ? userData.phoneNumber: 'Phone'}
                   </Text>
                   
               <Text h6={styles.h1}>
-                      Address: {userData ? userData.address: 'Address?'}
+                      Address: {userData ? userData.address: 'Address'}
                   </Text>
 
             </View>

@@ -7,7 +7,7 @@ const Step3 = ({navigation}) => {
         <View style={styles.vi}>
              <View style={styles.vil}>
                  <Text>
-                     Edit Profile 3
+                     Total: 
              </Text>
            </View>
         </View>        
