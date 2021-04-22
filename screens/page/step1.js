@@ -4,77 +4,78 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 const Step1 = ({navigation}) => {
 
-    const [date, setDate] = useState(new Date(1598051730000));
-    const [mode, setMode] = useState('date');
-    const [show, setShow] = useState(false);
+    const [isPickerShow, setIsPickerShow] = useState(false);
+  const [date, setDate] = useState(new Date(Date.now()));
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setShow(Platform.OS === 'ios');
-        setDate(currentDate);
-    };
+  const showPicker = () => {
+    setIsPickerShow(true);
+  };
 
-    const showMode = (currentMode) => {
-        setShow(true);
-        setMode(currentMode);
-    };
+  const onChange = (event, value) => {
+    setDate(value);
+    if (Platform.OS === 'android') {
+      setIsPickerShow(false);
+    }
+  };
 
-    const showDatepicker = () => {
-        showMode('date');
-    };
-
-    const showTimepicker = () => {
-        showMode('time');
-    };
     return (
-        <View style={styles.container} >
-            <View style={styles.vi}>
-                <View style={styles.vil}>
-                    <Text style={styles.h1}>
-                        Select the date you want to rent 
-                    </Text>
-                </View>
-                <View>
-        <Button onPress={showDatepicker} title="Show date picker!" />
+        <View style={styles.container}>
+      {/* Display the selected date */}
+      <View style={styles.pickedDateContainer}>
+        <Text style={styles.pickedDate}>{date.toUTCString()}</Text>
       </View>
-      <View>
-        <Button onPress={showTimepicker} title="Show time picker!" />
-      </View>
-      {show && (
+
+      {/* The button that used to trigger the date picker */}
+      {!isPickerShow && (
+        <View style={styles.btnContainer}>
+          <Button title="Show Picker" color="purple" onPress={showPicker} />
+        </View>
+      )}
+
+      {/* The date picker */}
+      {isPickerShow && (
         <DateTimePicker
-          testID="dateTimePicker"
           value={date}
-          mode={mode}
+          mode={'date'}
+          display={Platform.OS === 'ios' ? 'spinner' : 'default'}
           is24Hour={true}
-          display="default"
           onChange={onChange}
+          style={styles.datePicker}
         />
       )}
-            </View>
-        </View>
+    </View>
  )
 }
 
 export default Step1
 
 const styles = StyleSheet.create({
- container: {
-     flex: 1,
- },
- h1:{
-    fontSize:20,
- },
- vi:{
-     flex: 5,
- },
- vil:{
-     flex: 5,
-     alignItems: "center",
-
- },
- vi1:{
-     flex:1,
-     justifyContent: 'center',
-     alignItems: "center",
- },
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        flex: 1,
+        justifyContent: 'center',
+        padding: 50,
+      },
+    pickedDateContainer: {
+        padding: 20,
+        backgroundColor: '#eee',
+        borderRadius: 10,
+    },
+    pickedDate: {
+        fontSize: 18,
+        color: 'black',
+    },
+    btnContainer: {
+      padding: 30,
+    },
+    // This only works on iOS
+    datePicker: {
+        width: 320,
+        height: 260,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+    },
 })

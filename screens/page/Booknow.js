@@ -1,11 +1,14 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps'
 import Step1 from './step1'
 import Step2 from './step2'
 import Step3 from './step3'
+import * as firebase from 'firebase';
 
 const Booknow = ({navigation}) => {
+
+
     return (
         <View style={{flex:1}}>
             <ProgressSteps style={{flex:1}}
@@ -39,7 +42,7 @@ const Booknow = ({navigation}) => {
                     onSubmit={() => navigation.navigate("Book") }
                     >
                     <View style={{flex:1}}>
-                        <Step3></Step3>
+                        <Step3 ></Step3>
                     </View>
                 </ProgressStep>
             </ProgressSteps>

@@ -1,4 +1,4 @@
-import React, {useLayoutEffect} from 'react'
+import React, { useEffect, useState} from 'react'
 import { SafeAreaView } from 'react-native'
 import { StyleSheet, View, ScrollView, Button, Icon } from 'react-native'
 import { Image , Input , Text } from 'react-native-elements';
@@ -22,12 +22,13 @@ import Booknow from './page/Booknow'
 const BookScreenn = ({Navigator}) => {
 
 const BookR = createStackNavigator();
+
     return (
         <BookR.Navigator 
         screenOptions={{
             headerShown: false
           }}>
-            <BookR.Screen name='Book' component = {BookScreen} />
+            <BookR.Screen name='Book' component = {BookScreen}  />
             <BookR.Screen name='Bookn' component = {Booknow} />
             {/* <BookR.Screen name='step1' component = {step1} />
             <BookR.Screen name='step2' component = {step2} />
